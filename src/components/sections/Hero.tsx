@@ -51,7 +51,7 @@ export default function Hero() {
                         "text-2xl sm:text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.2] tracking-tight mb-8 font-display",
                         playfair.className
                     )}>
-                        Estruture seu negócio, defina seu posicionamento e assuma a liderança que você nasceu para ter.
+                        Aprenda em 1 dia como uma mulher deve liderar o seu negócio e o seu emocional.
                     </h1>
 
                     <p className="text-base md:text-lg mb-10 text-white/70 max-w-xl font-light leading-relaxed">
