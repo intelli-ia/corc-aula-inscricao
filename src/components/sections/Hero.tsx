@@ -14,11 +14,11 @@ export default function Hero() {
     const handleAddToCalendar = () => {
         // Criar evento no formato iCalendar
         const event = {
-            title: 'CORC Ao Vivo - Aula 55',
-            description: 'Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão - Aula gratuita e presencial',
-            location: 'Auditório da UNIDOM - Av. Estados Unidos, 20 - Comércio, Salvador - BA, 40010-020',
+            title: 'CORC Ao Vivo - UNIDOM',
+            description: 'Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão - Aula gratuita e presencial no Auditório da UNIDOM',
+            location: 'Av. Estados Unidos, 20 - Comércio, Salvador - BA, 40010-020',
             startDate: '2026-03-21T08:00:00',
-            endDate: '2026-03-21T17:00:00'
+            endDate: '2026-03-21T11:00:00'
         };
 
         const icsContent = `BEGIN:VCALENDAR
@@ -28,7 +28,7 @@ BEGIN:VEVENT
 UID:${Date.now()}@corc-aula.com
 DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
 DTSTART:20260321T080000
-DTEND:20260321T170000
+DTEND:20260321T110000
 SUMMARY:${event.title}
 DESCRIPTION:${event.description}
 LOCATION:${event.location}
@@ -40,7 +40,7 @@ END:VCALENDAR`;
         const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'corc-aula-55.ics';
+        link.download = 'corc-aula-unidom.ics';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -57,8 +57,8 @@ END:VCALENDAR`;
                     style={{
                         backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
                         backgroundPosition: 'center left',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 25%)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 25%)',
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
                         maskComposite: 'intersect',
                         WebkitMaskComposite: 'source-in'
                     }}
@@ -70,8 +70,8 @@ END:VCALENDAR`;
                     style={{
                         backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
                         backgroundPosition: 'center left',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 50%)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 50%)',
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
                         maskComposite: 'intersect',
                         WebkitMaskComposite: 'source-in'
                     }}
@@ -92,7 +92,7 @@ END:VCALENDAR`;
             </div>
 
             {/* Header Embedded */}
-            <header className="relative z-10 w-full py-8 border-b border-border/10">
+            <header className="relative z-10 w-full py-8">
                 <div className="w-full max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-start md:items-center text-sm md:text-base">
                     <div className="flex items-center gap-2 md:gap-4 font-semibold tracking-wide">
                         <span className="text-xl hidden md:inline">✱</span>
