@@ -1,12 +1,51 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Playfair_Display } from 'next/font/google';
 import { Marquee } from '@/components/ui/Marquee';
+import { RegistrationModal } from '@/components/features/registration/RegistrationModal';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 
 export default function Hero() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleAddToCalendar = () => {
+        // Criar evento no formato iCalendar
+        const event = {
+            title: 'CORC Ao Vivo - Aula 55',
+            description: 'Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão - Aula gratuita e presencial',
+            location: 'Auditório da UNIDOM - Av. Estados Unidos, 20 - Comércio, Salvador - BA, 40010-020',
+            startDate: '2026-03-21T08:00:00',
+            endDate: '2026-03-21T17:00:00'
+        };
+
+        const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CORC Ao Vivo//PT
+BEGIN:VEVENT
+UID:${Date.now()}@corc-aula.com
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:20260321T080000
+DTEND:20260321T170000
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'corc-aula-55.ics';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <section className="relative min-h-screen w-full bg-background flex flex-col overflow-hidden text-foreground pb-20">
 
@@ -14,23 +53,27 @@ export default function Hero() {
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 {/* Base image with low opacity - extended left on mobile, starts at 1/3 on desktop */}
                 <div
-                    className="absolute inset-y-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center opacity-20"
+                    className="absolute top-[-15%] md:top-0 bottom-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center opacity-20"
                     style={{
                         backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
                         backgroundPosition: 'center left',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)'
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 25%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 25%)',
+                        maskComposite: 'intersect',
+                        WebkitMaskComposite: 'source-in'
                     }}
                 />
 
                 {/* Luminosity overlay for modernist effect - extended left on mobile, starts at 1/3 on desktop */}
                 <div
-                    className="absolute inset-y-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center mix-blend-luminosity opacity-15"
+                    className="absolute top-[-15%] md:top-0 bottom-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center mix-blend-luminosity opacity-15"
                     style={{
                         backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
                         backgroundPosition: 'center left',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)'
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 50%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 50%)',
+                        maskComposite: 'intersect',
+                        WebkitMaskComposite: 'source-in'
                     }}
                 />
 
@@ -89,18 +132,21 @@ export default function Hero() {
             <div className="relative z-10 flex-1 flex items-center px-6 md:px-12 w-full max-w-7xl mx-auto pt-32 pb-12 md:py-12">
                 <div className="max-w-2xl w-full md:w-auto text-center md:text-left mx-auto md:mx-0">
                     <h1 className={cn(
-                        "text-2xl sm:text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.2] tracking-tight mb-8 font-display",
+                        "text-3xl sm:text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.2] tracking-tight mb-8 font-display",
                         playfair.className
                     )}>
                         Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão — Ao Vivo, Gratuito e Presencial.
                     </h1>
 
                     <p className="text-base md:text-lg mb-10 text-white/70 max-w-xl font-light leading-relaxed mx-auto md:mx-0">
-                        Uma oportunidade única de participar da aula 55 do CORC e absorver o método que está formando a nova geração de médicos excepcionais.
+                        Uma oportunidade única de participar ao vivo de uma das aulas do CORC e absorver o método que está formando a nova geração de médicos excepcionais.
                     </p>
 
                     <div className="flex flex-col gap-6 md:flex-row md:items-center max-w-max mx-auto md:mx-0">
-                        <button className="bg-[#0f0f0f] border border-white/10 hover:bg-white hover:text-black transition-colors duration-300 text-white px-8 py-4 rounded font-medium flex items-center justify-center gap-3">
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="bg-[#e59f14] border border-[#e59f14]/20 hover:bg-white hover:text-[#e59f14] transition-colors duration-300 text-white px-8 py-4 rounded font-medium text-lg flex items-center justify-center gap-3"
+                        >
                             <span>Garantir Inscrição</span>
                         </button>
                     </div>
@@ -121,6 +167,12 @@ export default function Hero() {
             <div className="absolute bottom-0 left-0 right-0 z-20">
                 <Marquee />
             </div>
+
+            <RegistrationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onAddToCalendar={handleAddToCalendar}
+            />
         </section>
     );
 }

@@ -1,76 +1,114 @@
 'use client';
 
+import { useState } from 'react';
 import { Section } from '@/components/ui/Section';
-import { Card, CardContent } from '@/components/ui/Card';
 import { FadeInView } from '@/components/animations/FadeInView';
 import { cn } from '@/lib/utils';
 import { Playfair_Display } from 'next/font/google';
-import { Target, Building2, Brain, Sparkles, TrendingUp, Clock } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import { RegistrationModal } from '@/components/features/registration/RegistrationModal';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 
-const benefits = [
-    {
-        icon: Target,
-        title: 'Clareza no Posicionamento',
-        description: 'Descubra o que te torna única no mercado e como comunicar isso com autoridade'
-    },
-    {
-        icon: Building2,
-        title: 'Estrutura do Negócio',
-        description: 'Organize processos, defina papéis e crie sistemas que funcionam sem você'
-    },
-    {
-        icon: Brain,
-        title: 'Inteligência Emocional',
-        description: 'Desenvolva autocontrole, confiança e resiliência para decisões assertivas'
-    },
-    {
-        icon: Sparkles,
-        title: 'Liderança Feminina',
-        description: 'Assuma o comando com empatia, firmeza e presença de liderança autêntica'
-    },
-    {
-        icon: TrendingUp,
-        title: 'Estratégia Comercial',
-        description: 'Defina ofertas, precificação e abordagem de vendas alinhadas ao seu valor'
-    },
-    {
-        icon: Clock,
-        title: 'Gestão do Tempo',
-        description: 'Priorize o que importa e elimine sobrecarga para ter mais resultados com menos esforço'
-    }
-];
-
 export default function WhatYouLearn() {
-    return (
-        <Section variant="spotlight" id="o-que-voce-vai-aprender">
-            <FadeInView direction="up">
-                <h2 className={cn(
-                    "text-3xl md:text-4xl lg:text-5xl text-center mb-16 font-display",
-                    playfair.className
-                )}>
-                    O que você vai conquistar em apenas 1 dia
-                </h2>
-            </FadeInView>
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleAddToCalendar = () => {
+        // Criar evento no formato iCalendar
+        const event = {
+            title: 'CORC Ao Vivo - Aula 55',
+            description: 'Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão - Aula gratuita e presencial',
+            location: 'Auditório da UNIDOM - Av. Estados Unidos, 20 - Comércio, Salvador - BA, 40010-020',
+            startDate: '2026-03-21T08:00:00',
+            endDate: '2026-03-21T17:00:00'
+        };
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {benefits.map((benefit, index) => (
-                    <FadeInView key={index} direction="up" delay={index * 0.1}>
-                        <Card className="h-full group hover:scale-105 hover:border-primary transition-all duration-300">
-                            <CardContent className="flex flex-col gap-4 h-full">
-                                <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                                    <benefit.icon className="w-6 h-6 text-primary" />
-                                </div>
-                                <h3 className="font-semibold text-lg">{benefit.title}</h3>
-                                <p className="text-white/70 text-sm leading-relaxed">
-                                    {benefit.description}
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </FadeInView>
-                ))}
+        const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CORC Ao Vivo//PT
+BEGIN:VEVENT
+UID:${Date.now()}@corc-aula.com
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:20260321T080000
+DTEND:20260321T170000
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'corc-aula-55.ics';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    return (
+        <>
+        <Section variant="spotlight" id="localizacao">
+            <div className="max-w-4xl mx-auto">
+                <FadeInView direction="up">
+                    <h1 className={cn(
+                        "text-4xl md:text-5xl lg:text-6xl text-center mb-6 font-display",
+                        playfair.className
+                    )}>
+                        Local da Aula
+                    </h1>
+                </FadeInView>
+
+                <FadeInView direction="up" delay={0.1}>
+                    <h2 className={cn(
+                        "text-2xl md:text-3xl lg:text-4xl text-center mb-4 font-display text-white/90",
+                        playfair.className
+                    )}>
+                        Auditório da UNIDOM
+                    </h2>
+                </FadeInView>
+
+                <FadeInView direction="up" delay={0.2}>
+                    <div className="flex items-center justify-center gap-2 mb-12 text-white/70">
+                        <MapPin className="w-5 h-5 hidden md:inline-block" />
+                        <p className="text-lg text-center">
+                            Av. Estados Unidos, 20 - Comércio, Salvador - BA, 40010-020
+                        </p>
+                    </div>
+                </FadeInView>
+
+                <FadeInView direction="up" delay={0.3}>
+                    <div className="relative w-full h-[400px] md:h-[450px] rounded-lg overflow-hidden mb-8 border border-white/10">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30762.28495324652!2d-38.50748334591372!3d-12.980559260272782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71604e577710a4b%3A0x8326b7f5fb1e8f18!2sCentro%20Universit%C3%A1rio%20UnidomPedro%20-%20Campus%20II!5e0!3m2!1spt-BR!2sbr!4v1772414035319!5m2!1spt-BR!2sbr"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0 }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            className="w-full h-full"
+                        />
+                    </div>
+
+                    <div className="flex justify-center">
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="bg-[#e59f14] border border-[#e59f14]/20 hover:bg-white hover:text-[#e59f14] transition-colors duration-300 text-white px-8 py-4 rounded font-medium text-lg flex items-center justify-center gap-3 w-full md:w-auto"
+                        >
+                            <span>Garantir Inscrição</span>
+                        </button>
+                    </div>
+                </FadeInView>
             </div>
         </Section>
+
+        <RegistrationModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onAddToCalendar={handleAddToCalendar}
+        />
+        </>
     );
 }
