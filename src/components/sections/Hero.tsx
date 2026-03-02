@@ -10,15 +10,42 @@ export default function Hero() {
     return (
         <section className="relative min-h-screen w-full bg-background flex flex-col overflow-hidden text-foreground pb-20">
 
-            {/* Background with multiple blend modes to simulate the photographic effect */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute inset-x-0 bottom-0 h-full w-full bg-gradient-to-t from-background via-primary-dark/80 to-transparent" />
+            {/* Background with modernist image treatment */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                {/* Base image with low opacity - extended left on mobile, starts at 1/3 on desktop */}
                 <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full mix-blend-color-dodge opacity-60 blur-[100px] pointer-events-none"
+                    className="absolute inset-y-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center opacity-20"
+                    style={{
+                        backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
+                        backgroundPosition: 'center left',
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)'
+                    }}
+                />
+
+                {/* Luminosity overlay for modernist effect - extended left on mobile, starts at 1/3 on desktop */}
+                <div
+                    className="absolute inset-y-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center mix-blend-luminosity opacity-15"
+                    style={{
+                        backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
+                        backgroundPosition: 'center left',
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)'
+                    }}
+                />
+
+                {/* Color overlay for tint - extended left on mobile, starts at 1/3 on desktop */}
+                <div className="absolute inset-y-0 right-0 left-[-20%] md:left-[33.33%] bg-gradient-to-br from-[#e59f14]/10 via-transparent to-transparent mix-blend-overlay" />
+
+                {/* Gradient vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/30 to-transparent" />
+
+                {/* Accent glow - positioned on the right */}
+                <div
+                    className="absolute top-1/2 right-[30%] -translate-y-1/2 w-[50vw] h-[50vw] md:w-[35vw] md:h-[35vw] rounded-full mix-blend-soft-light opacity-40 blur-[120px] pointer-events-none"
                     style={{ background: 'radial-gradient(circle, #e59f14 0%, transparent 70%)' }}
                 />
-                {/* Placeholder for the main hero image */}
-                <div className="absolute right-0 bottom-0 md:right-[10%] w-[120%] md:w-[60%] h-[100%] max-h-screen object-cover opacity-80 mix-blend-luminosity mix-blend-hard-light bg-black/20" />
             </div>
 
             {/* Header Embedded */}
@@ -59,7 +86,7 @@ export default function Hero() {
             </header>
 
             {/* Main Content */}
-            <div className="relative z-10 flex-1 flex items-center px-6 md:px-12 w-full max-w-7xl mx-auto py-12">
+            <div className="relative z-10 flex-1 flex items-center px-6 md:px-12 w-full max-w-7xl mx-auto pt-32 pb-12 md:py-12">
                 <div className="max-w-2xl w-full md:w-auto text-center md:text-left mx-auto md:mx-0">
                     <h1 className={cn(
                         "text-2xl sm:text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.2] tracking-tight mb-8 font-display",
