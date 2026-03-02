@@ -15,7 +15,7 @@ export default function Hero() {
         // Criar evento no formato iCalendar
         const event = {
             title: 'CORC Ao Vivo - UNIDOM',
-            description: 'Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão - Aula gratuita e presencial no Auditório da UNIDOM',
+            description: 'Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão - Aula gratuita e presencial. Local: Auditório da UNIDOM',
             location: 'Av. Estados Unidos, 20 - Comércio, Salvador - BA, 40010-020',
             startDate: '2026-03-21T08:00:00',
             endDate: '2026-03-21T11:00:00'
