@@ -14,8 +14,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CORC Ao Vivo - UNIDOM",
-  description: "Aprenda Raciocínio Clínico com o Dr. Carlos Gusmão - Aula gratuita e presencial no Auditório da UNIDOM",
+  title: "Papo de Venda - Band Bahia | Podcast com Silvana",
+  description: "Divulgue sua marca no podcast Papo de Venda com Silvana, apresentadora da Band Bahia. Alcance centenas de milhares de espectadores e potencialize seu negócio.",
+  openGraph: {
+    title: "Papo de Venda - Band Bahia | Podcast com Silvana",
+    description: "Divulgue sua marca no podcast Papo de Venda com Silvana, apresentadora da Band Bahia. Alcance centenas de milhares de espectadores.",
+    type: "website",
+    locale: "pt_BR",
+  },
 };
 
 export default function RootLayout({
