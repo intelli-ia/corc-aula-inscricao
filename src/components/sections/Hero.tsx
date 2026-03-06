@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { Playfair_Display } from 'next/font/google';
+import Image from 'next/image';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 
@@ -14,19 +15,28 @@ export default function Hero() {
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     };
 
+    // Obter mês atual em português
+    const getCurrentMonth = () => {
+        const months = [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+        ];
+        return months[new Date().getMonth()];
+    };
+
     return (
         <section className="relative min-h-screen w-full bg-background flex flex-col overflow-hidden text-foreground pb-20">
 
             {/* Background with modernist image treatment */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                {/* Base image with low opacity - extended left on mobile, starts at 1/3 on desktop */}
+                {/* Base image with higher opacity - extended left on mobile, starts at 1/3 on desktop */}
                 <div
-                    className="absolute top-[-15%] md:top-0 bottom-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center opacity-20"
+                    className="absolute top-[-15%] md:top-0 bottom-0 right-0 left-[-120%] md:left-[33.33%] bg-cover bg-center opacity-30"
                     style={{
-                        backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
+                        backgroundImage: 'url(/hero.jpg)',
                         backgroundPosition: 'center left',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',
                         maskComposite: 'intersect',
                         WebkitMaskComposite: 'source-in'
                     }}
@@ -34,12 +44,12 @@ export default function Hero() {
 
                 {/* Luminosity overlay for modernist effect - extended left on mobile, starts at 1/3 on desktop */}
                 <div
-                    className="absolute top-[-15%] md:top-0 bottom-0 right-0 left-[-60%] md:left-[33.33%] bg-cover bg-center mix-blend-luminosity opacity-15"
+                    className="absolute top-[-15%] md:top-0 bottom-0 right-0 left-[-120%] md:left-[33.33%] bg-cover bg-center mix-blend-luminosity opacity-10"
                     style={{
-                        backgroundImage: 'url(https://ogvyzqockhudvcmwnunb.supabase.co/storage/v1/object/public/files/corc-ao-vivo-aula.png)',
+                        backgroundImage: 'url(/hero.jpg)',
                         backgroundPosition: 'center left',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
-                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 30%), linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)',
                         maskComposite: 'intersect',
                         WebkitMaskComposite: 'source-in'
                     }}
@@ -48,9 +58,9 @@ export default function Hero() {
                 {/* Color overlay for tint - extended left on mobile, starts at 1/3 on desktop */}
                 <div className="absolute inset-y-0 right-0 left-[-20%] md:left-[33.33%] bg-gradient-to-br from-[#e59f14]/10 via-transparent to-transparent mix-blend-overlay" />
 
-                {/* Gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/30 to-transparent" />
+                {/* Gradient vignette - lighter to not cover the image too much */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent" />
 
                 {/* Accent glow - positioned on the right */}
                 <div
@@ -63,11 +73,10 @@ export default function Hero() {
             <header className="relative z-10 w-full py-8">
                 <div className="w-full max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-start md:items-center text-sm md:text-base">
                     <div className="flex items-center gap-2 md:gap-4 font-semibold tracking-wide">
-                        <span className="text-xl hidden md:inline">📻</span>
                         {/* Mobile: Two lines */}
                         <div className="flex flex-col md:hidden opacity-90">
-                            <span className="text-3xl font-bold leading-tight">Papo de</span>
-                            <span className="text-base font-medium leading-tight">Venda</span>
+                            <span className="text-xl font-bold leading-tight">Papo de</span>
+                            <span className="text-xl font-bold leading-tight">Vendas</span>
                         </div>
                         {/* Desktop: One line */}
                         <span className="hidden md:inline opacity-90">Papo de Vendas</span>
@@ -85,9 +94,7 @@ export default function Hero() {
                             <circle cx="12" cy="12" r="10" />
                             <polygon points="10 8 16 12 10 16 10 8" />
                         </svg>
-                        <span className="font-semibold">Apresentado por Silvana</span>
-                        <span className="opacity-50">|</span>
-                        <span className="font-light">Band Bahia</span>
+                        <span className="font-semibold">Apresentado por Silvana Silva</span>
                     </div>
                 </div>
             </header>
@@ -95,11 +102,23 @@ export default function Hero() {
             {/* Main Content */}
             <div className="relative z-10 flex-1 flex items-center px-6 md:px-12 w-full max-w-7xl mx-auto pt-32 pb-12 md:py-12">
                 <div className="max-w-2xl w-full md:w-auto text-center md:text-left mx-auto md:mx-0">
+                    {/* Logo Band */}
+                    <div className="mb-8 flex justify-center md:justify-start">
+                        <Image
+                            src="/logo-band.svg"
+                            alt="Logo Band Bahia"
+                            width={180}
+                            height={104}
+                            className="w-auto h-16 md:h-20 opacity-50"
+                            priority
+                        />
+                    </div>
+
                     <h1 className={cn(
                         "text-3xl sm:text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.2] tracking-tight mb-8 font-display",
                         playfair.className
                     )}>
-                        Divulgue Sua Marca na Band Bahia — Alcance Centenas de Milhares de Espectadores na Band Bahia.
+                        Divulgue sua marca na Band Bahia e eleve o patamar do seu negócio.
                     </h1>
 
                     <p className="text-base md:text-lg mb-10 text-white/70 max-w-xl font-light leading-relaxed mx-auto md:mx-0">
@@ -109,8 +128,7 @@ export default function Hero() {
                     {/* Barra de Vagas */}
                     <div className="mb-8 max-w-md mx-auto md:mx-0">
                         <div className="flex items-center justify-between mb-3">
-                            <span className="text-sm font-medium text-white/90">Vagas para Participação</span>
-                            <span className="text-sm font-semibold text-[#e59f14]">5 vagas disponíveis neste mês</span>
+                            <span className="text-sm font-semibold text-[#e59f14]">5 vagas disponíveis para {getCurrentMonth()}</span>
                         </div>
                         <div className="relative w-full h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm border border-white/5">
                             {/* Barra de progresso preenchida */}
@@ -138,15 +156,6 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Right side pagination decorative elements */}
-            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden lg:flex flex-col gap-3 opacity-30">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-                    <div key={i} className={cn(
-                        "h-px bg-white transition-all duration-300",
-                        i === 5 ? "w-8 opacity-100" : "w-4 hover:w-6"
-                    )} />
-                ))}
-            </div>
         </section>
     );
 }

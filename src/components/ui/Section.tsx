@@ -18,7 +18,7 @@ export function Section({
         <section
             id={id}
             className={cn(
-                "relative w-full py-12 md:py-16",
+                "relative w-full py-8 md:py-12",
                 variant === 'gradient' && "bg-gradient-to-b from-primary-dark/20 via-background to-background",
                 variant === 'spotlight' && "overflow-hidden",
                 className

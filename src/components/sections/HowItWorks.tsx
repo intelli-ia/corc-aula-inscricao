@@ -20,22 +20,12 @@ export default function HowItWorks() {
             "text-4xl md:text-5xl lg:text-6xl text-center mb-6 font-display",
             playfair.className
           )}>
-            Como Funciona
+            Como Funciona o Papo de Vendas
           </h1>
-        </FadeInView>
-
-        <FadeInView direction="up" delay={0.1}>
-          <h2 className={cn(
-            "text-2xl md:text-3xl lg:text-4xl text-center mb-4 font-display text-white/90",
-            playfair.className
-          )}>
-            Sua Empresa no Papo de Vendas
-          </h2>
         </FadeInView>
 
         <FadeInView direction="up" delay={0.2}>
           <div className="flex items-center justify-center gap-2 mb-12 text-white/70">
-            <Radio className="w-5 h-5 hidden md:inline-block" />
             <p className="text-lg text-center max-w-2xl">
               Descubra como sua marca pode alcançar milhares de pessoas através do podcast mais influente da Band Bahia
             </p>
@@ -67,39 +57,6 @@ export default function HowItWorks() {
                 </div>
               </div>
             )}
-          </div>
-
-          {/* Steps de participação */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
-              <div className="w-12 h-12 rounded-full bg-[#e59f14] text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                1
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Entre em Contato</h3>
-              <p className="text-white/70">
-                Preencha o formulário e nossa equipe entrará em contato
-              </p>
-            </div>
-
-            <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
-              <div className="w-12 h-12 rounded-full bg-[#e59f14] text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                2
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Planejamento</h3>
-              <p className="text-white/70">
-                Definimos juntos a melhor estratégia para sua marca
-              </p>
-            </div>
-
-            <div className="text-center p-6 rounded-lg bg-white/5 border border-white/10">
-              <div className="w-12 h-12 rounded-full bg-[#e59f14] text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                3
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Divulgação</h3>
-              <p className="text-white/70">
-                Sua empresa alcança milhares de potenciais clientes
-              </p>
-            </div>
           </div>
 
           <div className="flex justify-center">
